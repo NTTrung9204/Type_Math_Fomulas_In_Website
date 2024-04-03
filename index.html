@@ -17,9 +17,6 @@
     <div id="TypeMathFomula">
         <div id="SolutionFormInput">
 
-            
-            <div class="ToolBarMathFomula" id="toolbar"></div>
-            <div class="FormLaTexInput" id="latexInput"></div>
             <div id="TrungDZaiVoDich" class="CreateNewFormLaTexOrFormInput">
                 <button onclick="CreateElementLatex(this.parentNode.id)" class="NewFormLaTex">
                     <span>+ New LaTex</span>
@@ -28,13 +25,24 @@
                     <span>+ New Sentence</span>
                 </button>
             </div>
+            
+            <div class="ToolBarMathFomula" id="toolbar"></div>
+            <div class="FormLaTexInput" id="latexInput"></div>
 
-            <!-- <input placeholder="Viết nội dung..." class="FormTextInput" type="text"> -->
+            <div id="NTTrung9204" class="CreateNewFormLaTexOrFormInput">
+                <button onclick="CreateElementLatex(this.parentNode.id)" class="NewFormLaTex">
+                    <span>+ New LaTex</span>
+                </button>
+                <button onclick="CreateElementInput(this.parentNode.id)" class="NewFormInput">
+                    <span>+ New Sentence</span>
+                </button>
+            </div>
 
             
 
         </div>
         <div id="SolutionFormOutput">
+            <span>Bài làm của Trung</span>
             <img class="ImageOut" id="output" />
         </div>
     </div>

@@ -8,13 +8,22 @@
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
-    height: 500px;
+    height: 600px;
+    overflow: hidden;
 }
 
 #SolutionFormInput {
-    padding: 100px 5px 5px 5px;
+    padding: 100px 10px 5px 5px;
     position: relative;
     flex: 1.2;
+    overflow-x: auto;
+    overflow-x: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+}
+
+#SolutionFormInput::-webkit-scrollbar {
+    width: 0 !important;
+    display: none;
 }
 
 #SolutionFormOutput {
@@ -32,24 +41,28 @@
 }
 
 .ToolBarMathFomula {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    /* left: calc(50% + 0px);
+    transform: translateX(-50%); */
+    width: 710px;
+    background-color: #fff;
+    z-index: 100;
 }
 
-.CreateNewFormLaTexOrFormInput{
+.CreateNewFormLaTexOrFormInput {
     position: relative;
     height: 20px;
     opacity: 0;
     transition: all 0.5s;
 }
 
-.CreateNewFormLaTexOrFormInput:hover{
+.CreateNewFormLaTexOrFormInput:hover {
     opacity: 1;
 }
 
-.CreateNewFormLaTexOrFormInput::after{
+.CreateNewFormLaTexOrFormInput::after {
     content: "";
     display: block;
     width: 100%;
@@ -61,7 +74,7 @@
     z-index: -1;
 }
 
-.NewFormLaTex{
+.NewFormLaTex {
     all: unset;
     padding: 5px;
     border: 1px solid black;
@@ -76,12 +89,12 @@
     overflow: hidden;
 }
 
-.NewFormLaTex > span{
+.NewFormLaTex>span {
     position: relative;
     z-index: 1;
 }
 
-.NewFormLaTex::after{
+.NewFormLaTex::after {
     content: "";
     display: block;
     position: absolute;
@@ -94,11 +107,11 @@
     transition: all 0.7s;
 }
 
-.NewFormLaTex:hover::after{
+.NewFormLaTex:hover::after {
     clip-path: circle(100% at 50% 50%);
 }
 
-.NewFormInput{
+.NewFormInput {
     all: unset;
     padding: 5px;
     border: 1px solid black;
@@ -113,12 +126,12 @@
     overflow: hidden;
 }
 
-.NewFormInput > span{
+.NewFormInput>span {
     position: relative;
     z-index: 1;
 }
 
-.NewFormInput::after{
+.NewFormInput::after {
     content: "";
     display: block;
     position: absolute;
@@ -131,11 +144,11 @@
     transition: all 0.7s;
 }
 
-.NewFormInput:hover::after{
+.NewFormInput:hover::after {
     clip-path: circle(100% at 50% 50%);
 }
 
-.FormTextInput{
+.FormTextInput {
     all: unset;
     padding: 5px 10px;
     height: 40px;
@@ -145,5 +158,3 @@
     width: 100%;
     box-sizing: border-box;
 }
-
-
