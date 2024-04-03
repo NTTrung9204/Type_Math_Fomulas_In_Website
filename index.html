@@ -20,16 +20,16 @@
             
             <div class="ToolBarMathFomula" id="toolbar"></div>
             <div class="FormLaTexInput" id="latexInput"></div>
-            <div id="ppp" class="CreateNewFormLaTexOrFormInput">
-                <button class="NewFormLaTex">
+            <div id="TrungDZaiVoDich" class="CreateNewFormLaTexOrFormInput">
+                <button onclick="CreateElementLatex(this.parentNode.id)" class="NewFormLaTex">
                     <span>+ New LaTex</span>
                 </button>
-                <button onclick="CreateElementLatex(this.parentNode.id)" class="NewFormInput">
+                <button onclick="CreateElementInput(this.parentNode.id)" class="NewFormInput">
                     <span>+ New Sentence</span>
                 </button>
             </div>
 
-            <input placeholder="Viết nội dung..." class="FormTextInput" type="text">
+            <!-- <input placeholder="Viết nội dung..." class="FormTextInput" type="text"> -->
 
             
 

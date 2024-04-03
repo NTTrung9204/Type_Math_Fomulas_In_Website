@@ -21,11 +21,9 @@ function generateId(length = 10) {
 }
 
 function findIndexById(elementId) {
-    console.log(elementId);
 
     const children = solutionFormDiv.children;
     for (let i = 0; i < children.length; i++) {
-        console.log(children[i].id);
         if (children[i].id === elementId) {
             return i;
         }
@@ -34,11 +32,7 @@ function findIndexById(elementId) {
 }
 
 function CreateElementLatex(IdElement) {
-    console.log(IdElement);
-
     const IndexElement = findIndexById(IdElement);
-
-    console.log(IndexElement);
 
     let NameTextArea = generateId();
     let NameToolBar  = generateId();
@@ -51,6 +45,9 @@ function CreateElementLatex(IdElement) {
     var textAreaDiv = document.createElement("div");
     textAreaDiv.classList.add("FormLaTexInput");
     textAreaDiv.setAttribute("id", NameTextArea);
+    textAreaDiv.addEventListener("click", function () {
+        toolBarDiv.style.zIndex = ++focusOn;
+    });
 
     var containerOutDiv = document.createElement("div");
     containerOutDiv.classList.add("ContainerOut");
@@ -67,7 +64,7 @@ function CreateElementLatex(IdElement) {
 
     CreateFormMathFomula(NameTextArea, NameToolBar, NameImageOut);
 
-    CreateOptionAddButton(IdElement);
+    CreateOptionAddButton(IdElement, 2);
 }
 
 function CreateFormMathFomula(NameTextArea, NameToolBar, NameImageOut) {
@@ -76,24 +73,43 @@ function CreateFormMathFomula(NameTextArea, NameToolBar, NameImageOut) {
         .addOutput(new EqEditor.Output(NameImageOut));
 }
 
-function CreateOptionAddButton(IdElement) {
+function CreateOptionAddButton(IdElement, step) {
     const IndexElement = findIndexById(IdElement);
 
     const createNewFormLaTexOrFormInput = document.createElement('div');
     createNewFormLaTexOrFormInput.classList.add('CreateNewFormLaTexOrFormInput');
+    createNewFormLaTexOrFormInput.id = generateId();
 
     const newFormLaTex = document.createElement('button');
     newFormLaTex.classList.add('NewFormLaTex');
     newFormLaTex.innerHTML = '<span>+ New LaTex</span>';
+    newFormLaTex.onclick = function () {
+        CreateElementLatex(createNewFormLaTexOrFormInput.id);
+    };
 
     const newFormInput = document.createElement('button');
     newFormInput.classList.add('NewFormInput');
     newFormInput.innerHTML = '<span>+ New Sentence</span>';
+    newFormInput.onclick = function () {
+        CreateElementInput(createNewFormLaTexOrFormInput.id);
+    };
 
     createNewFormLaTexOrFormInput.appendChild(newFormLaTex);
     createNewFormLaTexOrFormInput.appendChild(newFormInput);
 
-    InsertElementAfter(IndexElement + 2, createNewFormLaTexOrFormInput);
+    InsertElementAfter(IndexElement + step, createNewFormLaTexOrFormInput);
+}
+
+function CreateElementInput(IdElement){
+    const inputElement = document.createElement('input');
+    inputElement.setAttribute('placeholder', 'Viết nội dung...');
+    inputElement.classList.add('FormTextInput');
+    inputElement.setAttribute('type', 'text');
+
+    const IndexElement = findIndexById(IdElement);
+    InsertElementAfter(IndexElement, inputElement);
+
+    CreateOptionAddButton(IdElement, 1);
 }
 
 function InsertElementAfter(IndexElement, newElement) {
