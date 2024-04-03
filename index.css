@@ -1,0 +1,40 @@
+#TypeMathFomula {
+    width: 1300px;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    height: 500px;
+}
+
+#SolutionFormInput {
+    padding: 100px 5px 5px 5px;
+    position: relative;
+    flex: 1.2;
+}
+
+#SolutionFormOutput {
+    position: relative;
+    flex: 1;
+    background-color: aqua;
+}
+
+.FormLaTexInput {
+    border: 2px solid black;
+    min-height: 10px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.ToolBarMathFomula {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+
