@@ -135,4 +135,15 @@
     clip-path: circle(100% at 50% 50%);
 }
 
+.FormTextInput{
+    all: unset;
+    padding: 5px 10px;
+    height: 40px;
+    line-height: 40px;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 
