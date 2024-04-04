@@ -5,7 +5,7 @@
 #TypeMathFomula {
     width: 1300px;
     padding: 10px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 10px;
     position: absolute;
     top: 50%;
@@ -14,6 +14,7 @@
     display: flex;
     height: 600px;
     overflow: hidden;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.4);
 }
 
 #SolutionFormInput {
@@ -46,11 +47,14 @@
 }
 
 .FormLaTexInput {
-    border: 2px solid black;
+    all: unset;
+    border: 2px solid #75EC75;
     min-height: 10px;
     border-radius: 10px;
     padding: 10px;
     flex: 1;
+    background-color: #75ec7533;
+    box-shadow: 0px 0px 10px 0px #75ec7533;
 }
 
 .ToolBarMathFomula {
@@ -77,8 +81,8 @@
     content: "";
     display: block;
     width: 100%;
-    height: 1px;
-    background-color: black;
+    height: 2px;
+    background-color: chocolate;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -88,7 +92,7 @@
 .NewFormLaTex {
     all: unset;
     padding: 5px;
-    border: 1px solid black;
+    border: 1px solid chocolate;
     border-radius: 5px;
     position: absolute;
     top: 50%;
@@ -103,13 +107,14 @@
 .NewFormLaTex>span {
     position: relative;
     z-index: 1;
+    color: chocolate;
 }
 
 .NewFormLaTex::after {
     content: "";
     display: block;
     position: absolute;
-    background-color: #75EC75;
+    background-color: rgba(210, 105, 30, 0.234);
     left: 0;
     top: 0;
     width: 100%;
@@ -125,7 +130,7 @@
 .NewFormInput {
     all: unset;
     padding: 5px;
-    border: 1px solid black;
+    border: 1px solid chocolate;
     border-radius: 5px;
     position: absolute;
     top: 50%;
@@ -140,13 +145,14 @@
 .NewFormInput>span {
     position: relative;
     z-index: 1;
+    color: chocolate;
 }
 
 .NewFormInput::after {
     content: "";
     display: block;
     position: absolute;
-    background-color: #75EC75;
+    background-color: rgba(210, 105, 30, 0.234);
     left: 0;
     top: 0;
     width: 100%;
@@ -164,11 +170,13 @@
     padding: 5px 10px;
     height: 40px;
     line-height: 40px;
-    border: 2px solid black;
+    border: 2px solid purple;
     border-radius: 10px;
     width: 100%;
     box-sizing: border-box;
     flex: 1;
+    background-color: rgba(128, 0, 128, 0.2);
+    box-shadow: 0px 0px 10px 0px rgba(128, 0, 128, 0.2);
 }
 
 .ImageOutput {
