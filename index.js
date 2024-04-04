@@ -33,10 +33,28 @@ function findSuitableElement(IdElement) {
     }
     for (let i = index; i >= 0; i--) {
         if (children[i].classList.contains('FormLaTex') || children[i].classList.contains('FormInput')) {
-            return children[i].children[0].id;
+            return children[i].children[1].id;
         }
     }
     return;
+}
+
+function findNextElement(IdElement) {
+    const children = solutionFormDiv.children;
+    var index = 0;
+    for (let i = 0; i < children.length; i++) {
+        if (children[i].id === IdElement) {
+            index = i;
+            break;
+        }
+    }
+    for (let i = index; i < children.length; i++) {
+        if (children[i].classList.contains('CreateNewFormLaTexOrFormInput')) {
+            return children[i];
+        }
+    }
+    return;
+
 }
 
 function findIndexById(elementId, ParentElement) {
@@ -78,7 +96,17 @@ function CreateElementLatex(IdElement) {
     const DeleteIcon = document.createElement('div');
     DeleteIcon.classList.add('DeleteIcon');
     DeleteIcon.innerHTML = '<i class="fa-solid fa-trash"></i>';
+    DeleteIcon.onclick = function () {
+        findNextElement(containerLatex.id).classList.add('scaleElement');
+        containerLatex.classList.add('scaleElement');
+        getById(NameImageOut).classList.add('scaleElement');
+    };
 
+    const SymbolIcon = document.createElement('div');
+    SymbolIcon.classList.add('SymbolIcon');
+    SymbolIcon.innerHTML = '<i class="fas fa-square-root-alt"></i>';
+
+    containerLatex.appendChild(SymbolIcon);
     containerLatex.appendChild(textAreaDiv);
     containerLatex.appendChild(DeleteIcon);
 
@@ -164,7 +192,17 @@ function CreateElementInput(IdElement) {
     const DeleteIcon = document.createElement('div');
     DeleteIcon.classList.add('DeleteIcon');
     DeleteIcon.innerHTML = '<i class="fa-solid fa-trash"></i>';
-    
+    DeleteIcon.onclick = function () {
+        findNextElement(containerInput.id).classList.add('scaleElement');
+        containerInput.classList.add('scaleElement');
+        getById(contentElement.id).classList.add('scaleElement');
+    };
+
+    const SymbolIcon = document.createElement('div');
+    SymbolIcon.classList.add('SymbolIcon');
+    SymbolIcon.innerHTML = '<i class="fas fa-pen-nib"></i>';
+
+    containerInput.appendChild(SymbolIcon);
     containerInput.appendChild(inputElement);
     containerInput.appendChild(DeleteIcon);
 
@@ -196,5 +234,14 @@ var ToolBar = document.getElementsByClassName('ToolBar');
 // ---------------MAIN---------------- //
 
 CreateFormMathFomula("latexInput", "toolbar", "latexInputOutput");
+getById('latexInput').addEventListener("click", function () {
+    getById('toolbar').style.zIndex = ++focusOn;
+});
+
+getByClass('DeleteIcon')[0].addEventListener('click', function () {
+    getById("FristFormLaTex").classList.add('scaleElement');
+    getById("latexInputOutput").classList.add('scaleElement');
+    getById("NTTrung9204").classList.add('scaleElement');
+});
 
 

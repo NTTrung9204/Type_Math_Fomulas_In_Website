@@ -1,3 +1,7 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
 #TypeMathFomula {
     width: 1300px;
     padding: 10px;
@@ -164,6 +168,7 @@
     border-radius: 10px;
     width: 100%;
     box-sizing: border-box;
+    flex: 1;
 }
 
 .ImageOutput {
@@ -183,6 +188,7 @@
 
 .FormLaTex{
     display: flex;
+    transition: all 0.5s;
 }
 
 .FormLaTex:hover .DeleteIcon{
@@ -217,9 +223,43 @@
 
 .FormInput{
     display: flex;
+    transition: all 0.5s;
 }
 
 .FormInput:hover .DeleteIcon{
     right: 0;
     opacity: 0.5;
+}
+
+.FormInput .SymbolIcon{
+    width: 40px;
+    height: 40px;
+    background-color: purple;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    font-size: 20px;
+    margin-right: 5px;
+    color: white;
+}
+
+.FormLaTex .SymbolIcon{
+    width: 40px;
+    height: 40px;
+    background-color: #75EC75;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    font-size: 20px;
+    margin-right: 5px;
+    color: black;
+}
+
+.scaleElement{
+    transform: scale(0);
+    position: absolute;
 }
