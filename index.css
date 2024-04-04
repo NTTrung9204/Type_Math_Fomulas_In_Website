@@ -44,11 +44,9 @@
     position: fixed;
     top: 0;
     left: 0;
-    /* left: calc(50% + 0px);
-    transform: translateX(-50%); */
     width: 710px;
     background-color: #fff;
-    z-index: 100;
+    z-index: 1;
 }
 
 .CreateNewFormLaTexOrFormInput {
@@ -157,4 +155,9 @@
     border-radius: 10px;
     width: 100%;
     box-sizing: border-box;
+}
+
+.ImageOutput {
+    display: block;
+    margin: 10px auto;
 }

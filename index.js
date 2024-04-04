@@ -20,9 +20,25 @@ function generateId(length = 10) {
     return id;
 }
 
-function findIndexById(elementId) {
-
+function findSuitableElement(IdElement) {
     const children = solutionFormDiv.children;
+    var index = 0;
+    for (let i = 0; i < children.length; i++) {
+        if (children[i].id === IdElement) {
+            index = i;
+            break;
+        }
+    }
+    for(let i = index; i >= 0; i--){
+        if(children[i].classList.contains('FormLaTexInput') || children[i].classList.contains('FormTextInput')){
+            return children[i].id;
+        }
+    }
+    return;
+}
+
+function findIndexById(elementId, ParentElement) {
+    const children = ParentElement.children;
     for (let i = 0; i < children.length; i++) {
         if (children[i].id === elementId) {
             return i;
@@ -32,11 +48,15 @@ function findIndexById(elementId) {
 }
 
 function CreateElementLatex(IdElement) {
-    const IndexElement = findIndexById(IdElement);
+    const IndexElement = findIndexById(IdElement, solutionFormDiv);
 
-    let NameTextArea = generateId();
-    let NameToolBar  = generateId();
-    let NameImageOut = generateId();
+    const IdNextElement = findSuitableElement(IdElement);
+
+    const IdInOutput = IdNextElement ? IdNextElement + "Output" : "";
+
+    const NameTextArea = generateId();
+    const NameToolBar  = generateId();
+    const NameImageOut = NameTextArea + "Output";
 
     var toolBarDiv = document.createElement("div");
     toolBarDiv.classList.add("ToolBarMathFomula");
@@ -49,22 +69,24 @@ function CreateElementLatex(IdElement) {
         toolBarDiv.style.zIndex = ++focusOn;
     });
 
-    var containerOutDiv = document.createElement("div");
-    containerOutDiv.classList.add("ContainerOut");
-
     var imageOutImg = document.createElement("img");
-    imageOutImg.classList.add("ImageOut");
+    imageOutImg.classList.add("ImageOutput");
     imageOutImg.setAttribute("id", NameImageOut);
 
-    containerOutDiv.appendChild(imageOutImg);
+    InsertElementAfter(IndexElement, toolBarDiv, solutionFormDiv);
+    InsertElementAfter(IndexElement, textAreaDiv, solutionFormDiv);
 
-    InsertElementAfter(IndexElement, toolBarDiv);
-    InsertElementAfter(IndexElement, textAreaDiv);
-    InsertElementAfter(IndexElement, containerOutDiv);
+    if(IdInOutput){
+        const IndexInOutput = findIndexById(IdInOutput, solutionFormOutput);
+        InsertElementAfter(IndexInOutput, imageOutImg, solutionFormOutput);
+    }
+    else{
+        solutionFormOutput.insertBefore(imageOutImg, solutionFormOutput.children[0]);
+    }
 
     CreateFormMathFomula(NameTextArea, NameToolBar, NameImageOut);
 
-    CreateOptionAddButton(IdElement, 2);
+    CreateOptionAddButton(IdElement);
 }
 
 function CreateFormMathFomula(NameTextArea, NameToolBar, NameImageOut) {
@@ -73,8 +95,8 @@ function CreateFormMathFomula(NameTextArea, NameToolBar, NameImageOut) {
         .addOutput(new EqEditor.Output(NameImageOut));
 }
 
-function CreateOptionAddButton(IdElement, step) {
-    const IndexElement = findIndexById(IdElement);
+function CreateOptionAddButton(IdElement) {
+    const IndexElement = findIndexById(IdElement, solutionFormDiv);
 
     const createNewFormLaTexOrFormInput = document.createElement('div');
     createNewFormLaTexOrFormInput.classList.add('CreateNewFormLaTexOrFormInput');
@@ -97,33 +119,55 @@ function CreateOptionAddButton(IdElement, step) {
     createNewFormLaTexOrFormInput.appendChild(newFormLaTex);
     createNewFormLaTexOrFormInput.appendChild(newFormInput);
 
-    InsertElementAfter(IndexElement + step, createNewFormLaTexOrFormInput);
+    InsertElementAfter(IndexElement + 1, createNewFormLaTexOrFormInput, solutionFormDiv);
 }
 
 function CreateElementInput(IdElement){
+    const IdNextElement = findSuitableElement(IdElement);
+
+    const IdInOutput = IdNextElement ? IdNextElement + "Output" : "";
+    const idInputTag = generateId();
+
     const inputElement = document.createElement('input');
     inputElement.setAttribute('placeholder', 'Viết nội dung...');
     inputElement.classList.add('FormTextInput');
     inputElement.setAttribute('type', 'text');
+    inputElement.setAttribute('id', idInputTag);
 
-    const IndexElement = findIndexById(IdElement);
-    InsertElementAfter(IndexElement, inputElement);
+    const contentElement = document.createElement('div');
+    contentElement.id = idInputTag + "Output";
 
-    CreateOptionAddButton(IdElement, 1);
+    inputElement.addEventListener("keyup", function () {
+        contentElement.innerHTML = inputElement.value;
+    });
+
+    const IndexElement = findIndexById(IdElement, solutionFormDiv);
+    InsertElementAfter(IndexElement, inputElement, solutionFormDiv);
+
+    if(IdInOutput){
+        const IndexInOutput = findIndexById(IdInOutput, solutionFormOutput);
+        InsertElementAfter(IndexInOutput, contentElement, solutionFormOutput);
+    }
+    else{
+        solutionFormOutput.insertBefore(contentElement, solutionFormOutput.children[0]);
+    }
+
+    CreateOptionAddButton(IdElement);
 }
 
-function InsertElementAfter(IndexElement, newElement) {
-    solutionFormDiv.insertBefore(newElement, solutionFormDiv.children[IndexElement + 1]);
+function InsertElementAfter(IndexElement, newElement, ParentElement) {
+    ParentElement.insertBefore(newElement, ParentElement.children[IndexElement + 1]);
 }
 
 // ---------------VARIABLE---------------- //
 
 const solutionFormDiv = getById("SolutionFormInput");
+const solutionFormOutput = getById("SolutionFormOutput");
 var focusOn = 1;
 var ToolBar = document.getElementsByClassName('ToolBar');
 
 // ---------------MAIN---------------- //
 
-CreateFormMathFomula("latexInput", "toolbar", "output");
+CreateFormMathFomula("latexInput", "toolbar", "latexInputOutput");
 
 
