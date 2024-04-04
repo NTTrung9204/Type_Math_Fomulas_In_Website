@@ -20,6 +20,8 @@ function generateId(length = 10) {
     return id;
 }
 
+// ---------------FUNCTION---------------- //
+
 function findSuitableElement(IdElement) {
     const children = solutionFormDiv.children;
     var index = 0;
@@ -29,9 +31,9 @@ function findSuitableElement(IdElement) {
             break;
         }
     }
-    for(let i = index; i >= 0; i--){
-        if(children[i].classList.contains('FormLaTexInput') || children[i].classList.contains('FormTextInput')){
-            return children[i].id;
+    for (let i = index; i >= 0; i--) {
+        if (children[i].classList.contains('FormLaTex') || children[i].classList.contains('FormInput')) {
+            return children[i].children[0].id;
         }
     }
     return;
@@ -55,8 +57,12 @@ function CreateElementLatex(IdElement) {
     const IdInOutput = IdNextElement ? IdNextElement + "Output" : "";
 
     const NameTextArea = generateId();
-    const NameToolBar  = generateId();
+    const NameToolBar = generateId();
     const NameImageOut = NameTextArea + "Output";
+
+    var containerLatex = document.createElement("div");
+    containerLatex.classList.add("FormLaTex");
+    containerLatex.setAttribute("id", generateId());
 
     var toolBarDiv = document.createElement("div");
     toolBarDiv.classList.add("ToolBarMathFomula");
@@ -69,18 +75,26 @@ function CreateElementLatex(IdElement) {
         toolBarDiv.style.zIndex = ++focusOn;
     });
 
+    const DeleteIcon = document.createElement('div');
+    DeleteIcon.classList.add('DeleteIcon');
+    DeleteIcon.innerHTML = '<i class="fa-solid fa-trash"></i>';
+
+    containerLatex.appendChild(textAreaDiv);
+    containerLatex.appendChild(DeleteIcon);
+
+
     var imageOutImg = document.createElement("img");
     imageOutImg.classList.add("ImageOutput");
     imageOutImg.setAttribute("id", NameImageOut);
 
     InsertElementAfter(IndexElement, toolBarDiv, solutionFormDiv);
-    InsertElementAfter(IndexElement, textAreaDiv, solutionFormDiv);
+    InsertElementAfter(IndexElement, containerLatex, solutionFormDiv);
 
-    if(IdInOutput){
+    if (IdInOutput) {
         const IndexInOutput = findIndexById(IdInOutput, solutionFormOutput);
         InsertElementAfter(IndexInOutput, imageOutImg, solutionFormOutput);
     }
-    else{
+    else {
         solutionFormOutput.insertBefore(imageOutImg, solutionFormOutput.children[0]);
     }
 
@@ -104,14 +118,14 @@ function CreateOptionAddButton(IdElement) {
 
     const newFormLaTex = document.createElement('button');
     newFormLaTex.classList.add('NewFormLaTex');
-    newFormLaTex.innerHTML = '<span>+ New LaTex</span>';
+    newFormLaTex.innerHTML = '<span><i class="fa-solid fa-circle-plus"></i> New LaTex</span>';
     newFormLaTex.onclick = function () {
         CreateElementLatex(createNewFormLaTexOrFormInput.id);
     };
 
     const newFormInput = document.createElement('button');
     newFormInput.classList.add('NewFormInput');
-    newFormInput.innerHTML = '<span>+ New Sentence</span>';
+    newFormInput.innerHTML = '<span><i class="fa-solid fa-circle-plus"></i> New Sentence</span>';
     newFormInput.onclick = function () {
         CreateElementInput(createNewFormLaTexOrFormInput.id);
     };
@@ -122,11 +136,16 @@ function CreateOptionAddButton(IdElement) {
     InsertElementAfter(IndexElement + 1, createNewFormLaTexOrFormInput, solutionFormDiv);
 }
 
-function CreateElementInput(IdElement){
+function CreateElementInput(IdElement) {
     const IdNextElement = findSuitableElement(IdElement);
 
     const IdInOutput = IdNextElement ? IdNextElement + "Output" : "";
     const idInputTag = generateId();
+
+    const containerInput = document.createElement('div');
+    containerInput.classList.add('FormInput');
+    containerInput.setAttribute('id', generateId());
+
 
     const inputElement = document.createElement('input');
     inputElement.setAttribute('placeholder', 'Viết nội dung...');
@@ -134,21 +153,29 @@ function CreateElementInput(IdElement){
     inputElement.setAttribute('type', 'text');
     inputElement.setAttribute('id', idInputTag);
 
+    
     const contentElement = document.createElement('div');
     contentElement.id = idInputTag + "Output";
-
+    
     inputElement.addEventListener("keyup", function () {
         contentElement.innerHTML = inputElement.value;
     });
 
-    const IndexElement = findIndexById(IdElement, solutionFormDiv);
-    InsertElementAfter(IndexElement, inputElement, solutionFormDiv);
+    const DeleteIcon = document.createElement('div');
+    DeleteIcon.classList.add('DeleteIcon');
+    DeleteIcon.innerHTML = '<i class="fa-solid fa-trash"></i>';
+    
+    containerInput.appendChild(inputElement);
+    containerInput.appendChild(DeleteIcon);
 
-    if(IdInOutput){
+    const IndexElement = findIndexById(IdElement, solutionFormDiv);
+    InsertElementAfter(IndexElement, containerInput, solutionFormDiv);
+
+    if (IdInOutput) {
         const IndexInOutput = findIndexById(IdInOutput, solutionFormOutput);
         InsertElementAfter(IndexInOutput, contentElement, solutionFormOutput);
     }
-    else{
+    else {
         solutionFormOutput.insertBefore(contentElement, solutionFormOutput.children[0]);
     }
 
