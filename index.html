@@ -8,10 +8,11 @@
     <title>Type Math Fomulas</title>
 
     <script src="https://editor.codecogs.com/eqneditor.api.min.js" crossorigin="anonymous"></script>
-    <!-- <link rel="stylesheet" href="reset.css"> -->
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/1be0d07f21.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
 </head>
 
 <body>
@@ -26,7 +27,7 @@
                     <span><i class="fa-solid fa-circle-plus"></i> New Sentence</span>
                 </button>
             </div>
-            
+
             <div class="ToolBarMathFomula" id="toolbar"></div>
             <div class="FormLaTex" id="FristFormLaTex">
                 <div class="SymbolIcon">
@@ -47,18 +48,18 @@
                 </button>
             </div>
 
-            
+
 
         </div>
         <div id="SolutionFormOutput">
             <img class="ImageOutput" id="latexInputOutput" />
+            <a id="download" onclick="doCapture()">
+                <i class="fas fa-download"></i>
+            </a>
         </div>
     </div>
 
-
-    <script src="utils.js"></script>
     <script src="index.js"></script>
-
 
 </body>
 

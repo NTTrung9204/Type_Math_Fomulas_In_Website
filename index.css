@@ -1,11 +1,6 @@
-*{
-    font-family: 'Roboto', sans-serif;
-}
-
 #TypeMathFomula {
     width: 1300px;
     padding: 10px;
-    /* border: 2px solid black; */
     border-radius: 10px;
     position: absolute;
     top: 50%;
@@ -39,6 +34,7 @@
     overflow-x: auto;
     overflow-x: -moz-scrollbars-none;
     -ms-overflow-style: none;
+    background-color: #fff;
 }
 
 #SolutionFormOutput::-webkit-scrollbar {
@@ -53,8 +49,13 @@
     border-radius: 10px;
     padding: 10px;
     flex: 1;
-    background-color: #75ec7533;
+    background-color: #75ec750e;
     box-shadow: 0px 0px 10px 0px #75ec7533;
+    transition: all 0.5s;
+}
+
+.FormLaTexInput:hover{
+    background-color: #75ec753a;
 }
 
 .ToolBarMathFomula {
@@ -175,8 +176,13 @@
     width: 100%;
     box-sizing: border-box;
     flex: 1;
-    background-color: rgba(128, 0, 128, 0.2);
+    background-color: rgba(128, 0, 128, 0.1);
     box-shadow: 0px 0px 10px 0px rgba(128, 0, 128, 0.2);
+    transition: all 0.5s;
+}
+
+.FormTextInput:hover{
+    background-color: rgba(128, 0, 128, 0.3);
 }
 
 .ImageOutput {
@@ -270,4 +276,21 @@
 .scaleElement{
     transform: scale(0);
     position: absolute;
+}
+
+#download{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.5s;
+    color: black;
+    border-radius: 50%;
+}
+
+#download:hover{
+    background-color: #75EC75;
+    
 }

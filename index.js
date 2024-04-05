@@ -20,6 +20,16 @@ function generateId(length = 10) {
     return id;
 }
 
+function doCapture() {
+    var prtContent = document.getElementById("SolutionFormOutput");
+    var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+    WinPrint.document.write('<link rel="stylesheet" href="index.css">')
+    WinPrint.document.write(prtContent.innerHTML);
+    WinPrint.document.close();
+    WinPrint.focus();
+    WinPrint.print();
+}
+
 // ---------------FUNCTION---------------- //
 
 function findSuitableElement(IdElement) {
@@ -96,7 +106,7 @@ function CreateElementLatex(IdElement) {
     const DeleteIcon = document.createElement('div');
     DeleteIcon.classList.add('DeleteIcon');
     DeleteIcon.innerHTML = '<i class="fa-solid fa-trash"></i>';
-    DeleteIcon.onclick = function () {
+    DeleteIcon.ondblclick = function () {
         findNextElement(containerLatex.id).classList.add('scaleElement');
         containerLatex.classList.add('scaleElement');
         getById(NameImageOut).classList.add('scaleElement');
@@ -181,10 +191,10 @@ function CreateElementInput(IdElement) {
     inputElement.setAttribute('type', 'text');
     inputElement.setAttribute('id', idInputTag);
 
-    
+
     const contentElement = document.createElement('div');
     contentElement.id = idInputTag + "Output";
-    
+
     inputElement.addEventListener("keyup", function () {
         contentElement.innerHTML = inputElement.value;
     });
@@ -192,7 +202,7 @@ function CreateElementInput(IdElement) {
     const DeleteIcon = document.createElement('div');
     DeleteIcon.classList.add('DeleteIcon');
     DeleteIcon.innerHTML = '<i class="fa-solid fa-trash"></i>';
-    DeleteIcon.onclick = function () {
+    DeleteIcon.ondblclick = function () {
         findNextElement(containerInput.id).classList.add('scaleElement');
         containerInput.classList.add('scaleElement');
         getById(contentElement.id).classList.add('scaleElement');
@@ -238,7 +248,7 @@ getById('latexInput').addEventListener("click", function () {
     getById('toolbar').style.zIndex = ++focusOn;
 });
 
-getByClass('DeleteIcon')[0].addEventListener('click', function () {
+getByClass('DeleteIcon')[0].addEventListener('dblclick', function () {
     getById("FristFormLaTex").classList.add('scaleElement');
     getById("latexInputOutput").classList.add('scaleElement');
     getById("NTTrung9204").classList.add('scaleElement');
